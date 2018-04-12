@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 `Observe` component to subscribe/unsubscribe rxjs Observable.
 
-```
+```jsx
 class Sample extends Component {
   timer$ = interval(100);
   users$ = interval(500).pipe(map(i => `user${i}`));
