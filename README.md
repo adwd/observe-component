@@ -2,7 +2,7 @@
 
 `Observe` component to subscribe/unsubscribe rxjs Observable.
 
-```
+```jsx
 import React from 'react';
 import { interval } from 'rxjs/observable/interval';
 import { map } from 'rxjs/operators';
