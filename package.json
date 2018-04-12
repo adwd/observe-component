@@ -1,6 +1,6 @@
 {
   "name": "@adwd/observe-component",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "utility component to subscribe/unsubscribe RxJS Observable",
   "main": "index.js",
   "module": "es/index.js",
