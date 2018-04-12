@@ -1,11 +1,15 @@
-# observe-component
-
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+# @adwd/observe-component
 
 `Observe` component to subscribe/unsubscribe rxjs Observable.
 
 ```
-class Sample extends Component {
+import React from 'react';
+import { interval } from 'rxjs/observable/interval';
+import { map } from 'rxjs/operators';
+
+import Observe from '@adwd/observe-component';
+
+class Example extends Component {
   timer$ = interval(100);
   users$ = interval(500).pipe(map(i => `user${i}`));
 

@@ -1,18 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { Subscription } from 'rxjs/Subscription';
 
-import { interval } from 'rxjs/observable/interval';
-import { map } from 'rxjs/operators';
+export default class Observe extends React.Component {
+  constructor(props) {
+    super(props);
 
-ReactDOM.render(
-  <App 
-    timer={interval(100)}
-    users={interval(500).pipe(map(i => `user${i}`))}
-  />,
-  document.getElementById('root')
-);
+    this.subscription = new Subscription();
+    this.state = Object.keys(props.source).reduce((acc, current) => {
+      acc[current] = null;
+      return acc;
+    }, {});
 
-registerServiceWorker();
+    Object.entries(props.source)
+      .map(([key, obs]) =>
+        obs.subscribe(v => {
+          this.setState({ [key]: v });
+        }),
+      )
+      .forEach(sub => this.subscription.add(sub));
+  }
+
+  componentWillUnmount() {
+    this.subscription.unsubscribe();
+  }
+
+  render() {
+    return this.props.children(this.state);
+  }
+}
